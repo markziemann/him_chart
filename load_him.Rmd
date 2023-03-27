@@ -61,7 +61,7 @@ ann_sub = ann[,c("chr","pos","strand","Name","Islands_Name",
 targets_gen = read.metharray.sheet(dataDir, pattern = "HIM_EPIC_sampleSheet.csv")
 #targets$ID = paste(targets$Sample_Group,targets_gen$Sample_Name,sep=".")
 rgSet = read.metharray.exp(targets = targets_gen)
-sampleNames(rgSet) = targets_gen$SampleName
+sampleNames(rgSet) = targets_gen$Sample_Name
 
 rgSet$Slide <- as.numeric(rgSet$Slide)
 rgSet$Gender <- as.character(rgSet$Gender)
@@ -146,12 +146,6 @@ c = cellCounts_new[targets_gen$Diagnosis == "2",]
 age.pal <- brewer.pal(8,"Set1")
 
 cellCounts_long <- melt(cellCounts_new, id = "celltype")
-
-cellCounts_long$Var1 <- targets_gen[match(cellCounts_long$Var1,  targets_gen$SampleID),"Diagnosis"]
-
-colnames(cellCounts_long) <- c("diagnosis","celltype","value")
-
-head(cellCounts_long)
 
 ```
 
@@ -278,6 +272,14 @@ output <- subset(output,P.Value<1e-4)
 head(output,30) %>% kbl() %>% kable_paper("hover", full_width = F)
 saveRDS(design, "HIM_rand_des.rds")
 saveRDS(mvals, "HIM_rand_mvals.rds")
+
+```
+
+## Session information
+
+```{r,session}
+
+sessionInfo()
 
 ```
 
