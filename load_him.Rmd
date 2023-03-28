@@ -39,6 +39,7 @@ suppressPackageStartupMessages({
   library("mitch")
   library("kableExtra")
   library("vioplot")
+  library("WGCNA")
 })
 
 #source("meth_functions.R")
